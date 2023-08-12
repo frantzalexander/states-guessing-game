@@ -36,12 +36,12 @@ scoreboard{Scoreboard Module}
 main{Main Game Module}
 write_answer[Write Answer to Map Location]
 map_image[Import Map Image Data from File]
-state_data[Import state data from csv file]
+state_data[Import state data from csv File]
 game[Create Game Conditions]
 prompt[Prompt User for Answer]
 convert[Convert User Input into Title Casing]
 score[Display Score]
-save[Save Remaining States to file]
+save[Save Remaining States to File]
 finish(((END)))
 start --> main
 start --> scoreboard
