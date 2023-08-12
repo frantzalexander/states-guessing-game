@@ -25,3 +25,33 @@ Upon exit of the game, the remaining names of the states would be saved to a fil
 
 
 ## Process
+The project is divided into two modules:
+- The Scoreboard Module
+- The Main Game Module
+
+```mermaid
+flowchart TD
+start(((START)))
+scoreboard{Scoreboard Module}
+main{Main Game Module}
+write_answer[Write Answer to Map Location]
+map_image[Import Map Image Data from File]
+state_data[Import state data from csv file]
+game[Create Game Conditions]
+prompt[Prompt User for Answer]
+convert[Convert User Input into Title Casing]
+score[Display Score]
+save[Save Remaining States to file]
+finish(((END)))
+start --> main
+start --> scoreboard
+scoreboard --> write_answer
+write_answer --> main
+main --> map_image
+map_image --> state_data
+state_data --> game
+game --> prompt
+prompt --> convert
+convert --> score
+score --> save
+save --> finish
