@@ -6,6 +6,7 @@ class Scoreboard(Turtle):
     
     def __init__(self):
         super().__init__()
+        self.hideturtle()
         self.color("black")
         
     def write_answer(self, state_name, x_coor, y_coor):

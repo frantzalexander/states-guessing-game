@@ -17,9 +17,12 @@ df = pd.read_csv(csv_file)
 
 all_states = df["state"].to_list()
 
+states_remaining = df["state"].to_list()
+
+
 def ask_question():
     answer_question = turtle.textinput(
-        title = f"Score: {score} Guess the State",
+        title = f"{len(guessed_states)}/50 States Correct",
         prompt = "What's another state's name?"
     )
     
@@ -29,17 +32,25 @@ def ask_question():
 
 scoreboard = Scoreboard()
 
-guesses_listing = [] 
+guessed_states = [] 
 score = 0
 
-game_is_on = True
-while game_is_on:
+while len(guessed_states) < 50:
     
     answer_state = ask_question()
+    
+    if answer_state == "Exit":
+        for state in guessed_states:
+            states_remaining.remove(state)
+        
+        states_to_learn = pd.DataFrame(data = states_remaining)
+        states_to_learn.to_csv("states_to_learn.csv", index = False)
+        break
+        
 
     if answer_state in all_states:
         score += 1
-        guesses_listing.append(answer_state)
+        guessed_states.append(answer_state)
         state_data = df[df["state"] == answer_state]
         x_location = int(state_data.iloc[0]["x"])
         y_location = int(state_data.iloc[0]["y"])
@@ -49,6 +60,5 @@ while game_is_on:
             x_coor = x_location,
             y_coor = y_location
             )
-        
 
 turtle.mainloop()
