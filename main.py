@@ -17,9 +17,6 @@ df = pd.read_csv(csv_file)
 
 all_states = df["state"].to_list()
 
-states_remaining = df["state"].to_list()
-
-
 def ask_question():
     answer_question = turtle.textinput(
         title = f"{len(guessed_states)}/50 States Correct",
@@ -40,9 +37,9 @@ while len(guessed_states) < 50:
     answer_state = ask_question()
     
     if answer_state == "Exit":
-        for state in guessed_states:
-            states_remaining.remove(state)
-        
+        states_remaining = [
+            state for state in all_states if state not in guessed_states
+            ]
         states_to_learn = pd.DataFrame(data = states_remaining)
         states_to_learn.to_csv("states_to_learn.csv", index = False)
         break
